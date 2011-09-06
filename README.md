@@ -1,6 +1,6 @@
 # octoploy
 
-Simple deployment server for GitHub post-received hooks.
+A simple deployment server for GitHub post-receive hooks.
 
 ## Usage
 
@@ -21,3 +21,22 @@ When a notification payload is received from GitHub, octoploy runs
 
 To rollback to a previous version of your code, push a new commit, so
 octoploy can deploy it normally.
+
+## nginx config
+
+In your nginx configuration, add an upstrema:
+
+    upstream octoploy {
+      server 127.0.0.1:8079;
+    }
+
+In your server block, add a secret location that will forward requests
+to octoploy:
+
+    location = /_/yourSecretStringHere/deploy {
+      proxy_pass http://octoploy;
+      break;
+    }
+
+octoploy doesn't care what URL hits it, so any location will do. Use
+the full URL when configuring the post-receive hook on GitHub.
