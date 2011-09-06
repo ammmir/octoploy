@@ -4,9 +4,9 @@ A simple deployment server for GitHub post-receive hooks.
 
 ## Usage
 
-Add an executable `octoploy.sh` file to the root of your repo that will
-perform post-receive actions to deploy the new code (such as calling
-`npm update` and restarting your app).
+Create an executable `octoploy.sh` file in the root of your repo that will
+perform post-receive actions to deploy the new code, such as calling
+`npm update` and restarting your app.
 
 Start the server with:
 
@@ -19,12 +19,12 @@ listens on 127.0.0.1:8079 by default.
 When a notification payload is received from GitHub, octoploy runs
 `git pull` and executes `./octoploy.sh` in the repo.
 
-To rollback to a previous version of your code, push a new commit, so
-octoploy can deploy it normally.
+octoploy doesn't offer rollback, so just commit a new change and push it
+so it can be deployed as usual.
 
 ## nginx config
 
-In your nginx configuration, add an upstrema:
+In your nginx configuration, add an upstream:
 
     upstream octoploy {
       server 127.0.0.1:8079;
