@@ -17,7 +17,9 @@ put it behind a reverse proxy or use a firewall to restrict access. It
 listens on 127.0.0.1:8079 by default.
 
 When a notification payload is received from GitHub, octoploy runs
-`git pull` and executes `./octoploy.sh` in the repo.
+`git pull` and executes `./octoploy.sh` in the repo. Don't forget to
+add a deploy key to your repo on GitHub so the user account that octoploy
+runs under has access to your code.
 
 octoploy doesn't offer rollback, so just commit a new change and push it
 so it can be deployed as usual.
