@@ -83,7 +83,7 @@ var server = http.createServer(function(req, res) {
 });
 
 if(process.argv.length < 3) {
-  console.error('usage: ./octoploy.js <path to git repo>');
+  console.error('usage: ./octoploy.js <path to git repo> [port]');
   process.exit(1);
 } else {
   try {
@@ -95,6 +95,6 @@ if(process.argv.length < 3) {
 
   sRepoPath = process.argv[2];
 
-  server.listen(8079, '127.0.0.1');
+  server.listen(process.argv[3] || 8079, '127.0.0.1');
   console.log('octoploy ready!');
 }
